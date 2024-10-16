@@ -23,7 +23,7 @@ const Header = () => {
           </ul>
         </nav>
         <div className="flex gap-10 items-center">
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition duration-300">
+          <button className="bg-violet-600 hover:bg-violet-700 text-white font-semibold py-2 px-4 rounded transition duration-300">
             Join
           </button>
           <CircleUserRound className="h-8 w-8 text-white hover:text-gray-400 cursor-pointer" />
