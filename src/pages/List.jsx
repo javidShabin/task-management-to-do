@@ -86,7 +86,7 @@ const List = () => {
                 </p>
               </div>
               <div className="p-4 bg-gray-100 border-t border-gray-200">
-                <Link to={"/edit"}>
+                <Link to={`/edit/${item._id}`}>
                   <button className="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition-colors">
                     Edit Item
                   </button>
