@@ -7,16 +7,18 @@ export default function Home() {
     register,
     handleSubmit,
     formState: { errors },
+    reset, // Added reset here
   } = useForm();
 
   const onSubmit = async (data) => {
     try {
       const response = await axiosInstance({
         method: "POST",
-        url: "/item/addItems", // Corrected typo
+        url: "/item/addItems",
         data,
       });
       toast.success(response.data.message);
+      reset(); // Reset the form fields after successful submission
     } catch (error) {
       console.error(error);
       toast.error("Item addition failed");
