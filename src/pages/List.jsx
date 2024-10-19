@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../config/axiosInstance";
 import { Trash2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const List = () => {
   const [items, setItems] = useState([]);
@@ -85,9 +86,11 @@ const List = () => {
                 </p>
               </div>
               <div className="p-4 bg-gray-100 border-t border-gray-200">
-                <button className="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition-colors">
-                  Edit Item
-                </button>
+                <Link to={"/edite"}>
+                  <button className="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition-colors">
+                    Edit Item
+                  </button>
+                </Link>
               </div>
             </div>
           ))}
