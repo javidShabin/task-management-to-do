@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 const List = () => {
   const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Fetch items from API
   const getAllItems = async () => {
@@ -16,6 +17,8 @@ const List = () => {
       setItems(response.data.items || []);
     } catch (error) {
       console.error("Error fetching items:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -54,6 +57,14 @@ const List = () => {
   useEffect(() => {
     getAllItems();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <span className="loading loading-dots loading-lg bg-orange-400"></span>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto p-6 bg-gradient-to-br from-gray-100 to-gray-300 min-h-screen">
