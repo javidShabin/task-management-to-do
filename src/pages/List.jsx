@@ -32,6 +32,19 @@ const List = () => {
     }
   };
 
+  // Handle item deletion
+  const handleDelete = async (id) => {
+    try {
+      await axiosInstance({
+        method: "DELETE",
+        url: `/item/deleteItem/${id}`,
+      });
+      setItems(items.filter(item => item._id !== id)); // Remove item from state
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
+  };
+
   useEffect(() => {
     getAllItems();
   }, []);
@@ -46,8 +59,14 @@ const List = () => {
           {items.map((item, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden transform hover:scale-105 transition-transform duration-300"
+              className="bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden transform hover:scale-105 transition-transform duration-300 relative"
             >
+              <button
+                onClick={() => handleDelete(item._id)}
+                className="absolute top-4 right-4 text-gray-500 hover:text-red-500 transition-colors"
+              >
+                <Trash2 size={24} />
+              </button>
               <div className="p-6">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                   {item.vehicle}
