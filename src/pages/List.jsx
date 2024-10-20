@@ -32,16 +32,21 @@ const List = () => {
     }
   };
 
-  // Handle item deletion
+  // Handle item deletion with confirmation
   const handleDelete = async (id) => {
-    try {
-      await axiosInstance({
-        method: "DELETE",
-        url: `/item/deleteItem/${id}`,
-      });
-      setItems(items.filter(item => item._id !== id)); // Remove item from state
-    } catch (error) {
-      console.error("Error deleting item:", error);
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this item?"
+    );
+    if (confirmed) {
+      try {
+        await axiosInstance({
+          method: "DELETE",
+          url: `/item/deleteItem/${id}`,
+        });
+        setItems(items.filter((item) => item._id !== id)); // Remove item from state
+      } catch (error) {
+        console.error("Error deleting item:", error);
+      }
     }
   };
 
