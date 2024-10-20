@@ -16,8 +16,7 @@ export default function Home() {
         url: "/item/addItems", // Corrected typo
         data,
       });
-      console.log(response);
-      toast.success("Item added");
+      toast.success(response.data.message);
     } catch (error) {
       console.error(error);
       toast.error("Item addition failed");
