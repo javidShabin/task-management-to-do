@@ -1,6 +1,7 @@
 import { CircleUserRound } from "lucide-react";
 import React from "react";
 import { logo } from "../assets";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -12,14 +13,14 @@ const Header = () => {
         <nav>
           <ul className="flex items-center space-x-6">
             <li>
-              <a href="#" className="hover:text-gray-400">
-                Home
-              </a>
+              <Link to={"/"} className="hover:text-gray-400">
+              Home
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-gray-400">
+              <Link to={"/list"} className="hover:text-gray-400">
                 Tasks
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
