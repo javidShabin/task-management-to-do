@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="bg-gray-800 text-white sticky top-0 left-0">
+    <header className="bg-gray-800 text-white sticky top-0 left-0 z-10">
       <div className="container mx-auto flex justify-between items-center px-4 py-1">
         <div className="logo">
           <img src={logo} className="w-[50px]" />
