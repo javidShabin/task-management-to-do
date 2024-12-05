@@ -55,13 +55,13 @@ const List = () => {
                 <p className="text-sm text-gray-500">
                   Added on:{" "}
                   <span className="font-medium text-gray-700">
-                    {formatDate(item.date)}
+                    {formatDate(item.createdAt)}
                   </span>
                 </p>
               </div>
               <div className="p-4 bg-gray-100 border-t border-gray-200">
                 <button className="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition-colors">
-                  View Details
+                  Edite Item
                 </button>
               </div>
             </div>
