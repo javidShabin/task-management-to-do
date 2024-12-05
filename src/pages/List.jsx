@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../config/axiosInstance";
 import { Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import html2pdf from 'html2pdf.js';
 
 const List = () => {
   const [items, setItems] = useState([]);
@@ -54,6 +55,12 @@ const List = () => {
     }
   };
 
+  // Download items list as PDF
+  const downloadPDF = () => {
+    const element = document.getElementById("items-list"); // Get the section you want to export
+    html2pdf().from(element).save('items-list.pdf'); // Convert to PDF and save
+  };
+
   useEffect(() => {
     getAllItems();
   }, []);
@@ -71,44 +78,53 @@ const List = () => {
       <h1 className="text-4xl font-extrabold text-center mb-8 text-gray-800 tracking-wide">
         Item List
       </h1>
-      {items.length > 0 ? (
-        <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {items.map((item, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden transform hover:scale-105 transition-transform duration-300 relative"
-            >
-              <button
-                onClick={() => handleDelete(item._id)}
-                className="absolute top-4 right-4 text-gray-500 hover:text-red-500 transition-colors"
+      <button
+        onClick={downloadPDF}
+        className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 mb-6"
+      >
+        Download as PDF
+      </button>
+
+      <div id="items-list">
+        {items.length > 0 ? (
+          <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {items.map((item, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden transform hover:scale-105 transition-transform duration-300 relative"
               >
-                <Trash2 size={24} />
-              </button>
-              <div className="p-6">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                  {item.vehicle}
-                </h2>
-                <p className="text-gray-700 mb-4">{item.item}</p>
-                <p className="text-sm text-gray-500">
-                  Added on:{" "}
-                  <span className="font-medium text-gray-700">
-                    {formatDate(item.createdAt)}
-                  </span>
-                </p>
+                <button
+                  onClick={() => handleDelete(item._id)}
+                  className="absolute top-4 right-4 text-gray-500 hover:text-red-500 transition-colors"
+                >
+                  <Trash2 size={24} />
+                </button>
+                <div className="p-6">
+                  <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+                    {item.vehicle}
+                  </h2>
+                  <p className="text-gray-700 mb-4">{item.item}</p>
+                  <p className="text-sm text-gray-500">
+                    Added on:{" "}
+                    <span className="font-medium text-gray-700">
+                      {formatDate(item.createdAt)}
+                    </span>
+                  </p>
+                </div>
+                <div className="p-4 bg-gray-100 border-t border-gray-200">
+                  <Link to={`/edit/${item._id}`}>
+                    <button className="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition-colors">
+                      Edit Item
+                    </button>
+                  </Link>
+                </div>
               </div>
-              <div className="p-4 bg-gray-100 border-t border-gray-200">
-                <Link to={`/edit/${item._id}`}>
-                  <button className="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition-colors">
-                    Edit Item
-                  </button>
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p className="text-center text-gray-500 text-lg">No items available.</p>
-      )}
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-gray-500 text-lg">No items available.</p>
+        )}
+      </div>
     </div>
   );
 };
